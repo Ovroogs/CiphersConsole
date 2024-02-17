@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using static System.Console;
+﻿using static System.Console;
 
 namespace CiphersLibrary
 {
@@ -12,16 +6,16 @@ namespace CiphersLibrary
     {
         public Caesar(string str) => StringToEncrypt = str.ToUpper();
 
-        public override string decrypt()
+        public override void decrypt()
         {
             CreateKey(out int key);
-            return $"{StringToEncrypt} {cipher(-key)}";
+            StringToEncrypt = cipher(-key);
         }
 
-        public override string encrypt()
+        public override void encrypt()
         {
             CreateKey(out int key);
-            return $"{StringToEncrypt} {cipher(key)}";
+            StringToEncrypt = cipher(key);
         }
 
         private string cipher(int key)
@@ -31,11 +25,11 @@ namespace CiphersLibrary
             foreach (var characterFromString in StringToEncrypt)
             {
                 int character = characterFromString;
-                if (character >= symbolMin && character <= symbolMax)
+                if (character >= SYMBOLMIN && character <= SYMBOLMAX)
                 {
                     character += key;
-                    if (character > symbolMax) character -= AlphabetSize;
-                    else if (character < symbolMin) character += AlphabetSize;
+                    if (character > SYMBOLMAX) character -= ALPHABETSIZE;
+                    else if (character < SYMBOLMIN) character += ALPHABETSIZE;
                     cipherString += (char)character;
                 }
             }

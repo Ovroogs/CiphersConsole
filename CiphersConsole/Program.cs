@@ -7,7 +7,7 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        string str = string.Empty;
+        var str = string.Empty;
         byte numberCipher = 0;
 
         while (true)
@@ -28,11 +28,20 @@ internal class Program
                     Clear();
                     switch (numberCipher)
                     {
-                        case 3:
-                            WriteLine(new Caesar(str).encrypt());
+                        case 1:
+                        case 2:
                             break;
+                        case 3:
                         case 4:
-                            WriteLine(new Caesar(str).decrypt());
+                            Caesar caesar = new(str);
+                            if (numberCipher == 3) caesar.encrypt();
+                            else caesar.decrypt();
+                            WriteLine(caesar.StringToEncrypt);
+                            break;
+                        case 6:
+                            Xor xor = new(str);
+                            xor.encrypt();
+                            WriteLine(xor.StringToEncrypt);
                             break;
                         default:
                             break;
